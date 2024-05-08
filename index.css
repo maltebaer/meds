@@ -1,3 +1,23 @@
 @import "https://unpkg.com/open-props";
 @import "https://unpkg.com/open-props/normalize.min.css";
 @import "https://unpkg.com/open-props/buttons.min.css";
+
+.page-container {
+    display: grid;
+    place-content: center;
+    padding: var(--size-fluid-3);
+}
+
+.stack {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.stack * {
+    margin-block: 0;
+}
+
+.stack * + * {
+    margin-block-start: var(--space, 1.5rem);
+}
