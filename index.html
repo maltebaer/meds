@@ -17,14 +17,88 @@
 
     <script
         defer
+        src="https://cdn.jsdelivr.net/npm/@alpinejs/persist@3.x.x/dist/cdn.min.js"
+    ></script>
+    <script
+        defer
         src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"
     ></script>
 </head>
 
-<body x-data="foo">
+<body x-data="medis">
     <main>
         <h1>Medis</h1>
-        <p>Ein leichtgewichtiges Medikamentenverwaltungssystem, das auf Web-Technologien basiert.</p>
+
+        <p>Hilft dir, den Zeitpunkt deiner Medikamenteneinahme zu tracken und den nächst möglichen Zeitpunkt zu
+            bestimmen.</p>
+
+        <fieldset>
+            <legend>Ibuprofen</legend>
+
+            <label>
+                <span>Zeitpunkt</span>
+                <input
+                    type="datetime-local"
+                    x-model="doseTime"
+                >
+            </label>
+
+            <button x-on:click="addDose('ibuprofen')">Einnahme hinzufügen</button>
+
+            <button x-on:click="clearMed('ibuprofen')">Liste leeren</button>
+
+            <ul>
+                <template x-if="ibuprofen.length === 0">
+                    <li>Noch kein Eintrag vorhanden</li>
+                </template>
+                <template x-for="dose in ibuprofen">
+                    <li>
+                        <span x-text="displayDoseTime(dose)"></span>
+                        (<span x-text="displayRelativeDoseTime(dose)"></span>)
+                    </li>
+                </template>
+                <template x-if="ibuprofen.length > 0">
+                    <li>
+                        <span x-text="displayDoseTime(calcNextDose('ibuprofen'))"></span>
+                        (<span x-text="displayRelativeDoseTime(calcNextDose('ibuprofen'))"></span>)
+                    </li>
+                </template>
+            </ul>
+        </fieldset>
+
+        <fieldset>
+            <legend>Paracetamol</legend>
+
+            <label>
+                <span>Zeitpunkt</span>
+                <input
+                    type="datetime-local"
+                    x-model="doseTime"
+                >
+            </label>
+
+            <button x-on:click="addDose('paracetamol')">Einnahme hinzufügen</button>
+
+            <button x-on:click="clearMed('paracetamol')">Liste leeren</button>
+
+            <ul>
+                <template x-if="paracetamol.length === 0">
+                    <li>Noch kein Eintrag vorhanden</li>
+                </template>
+                <template x-for="dose in paracetamol">
+                    <li>
+                        <span x-text="displayDoseTime(dose)"></span>
+                        (<span x-text="displayRelativeDoseTime(dose)"></span>)
+                    </li>
+                </template>
+                <template x-if="paracetamol.length > 0">
+                    <li>
+                        <span x-text="displayDoseTime(calcNextDose('paracetamol'))"></span>
+                        (<span x-text="displayRelativeDoseTime(calcNextDose('paracetamol'))"></span>)
+                    </li>
+                </template>
+            </ul>
+        </fieldset>
     </main>
 
     <script src="index.js"></script>
